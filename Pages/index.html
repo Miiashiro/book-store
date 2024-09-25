@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/books.css">
+    <script src="../js/carrossel.js" defer></script>
+    <script src="../js/books.js" defer></script>
+    <title>Minha Loja</title>
+</head>
+
+<body>
+    <header>
+        <div class="nav-header">
+            <img src="../imgs/header/logoPizzaria.png" alt="logo" class="logo">
+            <nav>
+                <ul>
+                    <li>Home</li>
+                    <li><a href="./books.html">Livros</a></li>
+                    <li>
+                        <img src="../imgs/header/carrinho.png" alt="carrinho" class="carrinho-ico"></img>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="slide">
+            <div class="slider">
+                <div class="content-image">
+                    <img src="../imgs/carrossel/desconto_livro.png" alt="desconto de livro">
+                    <img src="../imgs/carrossel/livro.png" alt="livros">
+                    <img src="../imgs/carrossel/biblioteca.png" alt="biblioteca">
+                </div>
+            </div>
+            <button id="prevSlide">&lt;</button>
+            <button id="nextSlide">&gt;</button>
+            <div class="lenght-dots">
+                <span class="radio1"></span>
+                <span class="radio2"></span>
+            </div>
+        </section>
+        <section>
+            <div class="container"> 
+            </div>
+        </section>
+    </main>
+
+    <dialog class="modal">
+        <h2>CARRINHO</h2>
+
+        <span id="show">Sem livros no carrinho</span>
+        
+        <div class="itens">
+        </div>
+
+        <div class="button_buy">
+            <button class="comprar">Comprar</button>
+        </div>
+    </dialog>
+
+    <footer>
+        ola footer
+    </footer>
+</body>
+</html>
