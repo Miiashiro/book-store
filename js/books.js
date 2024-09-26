@@ -3,6 +3,7 @@ var dialog = document.querySelector('.carrinho-ico');
 var modal = document.querySelector('.modal');
 var itemCart = document.querySelector('.itens');
 var showBook = document.querySelector('#show');
+var total = document.querySelector('.total');
 
 window.addEventListener('click', (e) => {
     if (e.target === modal) {
@@ -112,6 +113,7 @@ dialog.addEventListener("click", (e) => {
     }
 });
 
+//Mostrar livros no carrinho
 function showItemCart() {
     cartShopping.map((booksCart) => {
         //div
@@ -153,11 +155,6 @@ function showItemCart() {
         buttonMinus.innerHTML = "-";
         wrapQuantCart.appendChild(buttonMinus);
 
-        buttonMinus.addEventListener("click", (e) => {
-            booksCart.quantity --;
-            console.log(cartShopping)
-        })
-
         //input marcando a quantidade comprada
         const quantityCart = document.createElement("input");
         quantityCart.classList.add("quantity_cart");
@@ -170,9 +167,22 @@ function showItemCart() {
         buttonPlus.innerHTML = "+";
         wrapQuantCart.appendChild(buttonPlus);
 
+        //Total do preco dos livros no carrinho
+        total.innerHTML = `Total: R$ ${parseInt(booksCart.price)}`;
+
+        //funcao nos botoes
+        buttonMinus.addEventListener("click", (e) => {
+            if(quantityCart.value > 1){
+                booksCart.quantity --;
+                quantityCart.value = booksCart.quantity
+            }
+        })
+
         buttonPlus.addEventListener("click", (e) => {
             booksCart.quantity ++;
-            console.log(cartShopping)
+            quantityCart.value = booksCart.quantity;
+
+            total.innerHTML = `Total: R$ ${booksCart.quantity * parseInt(booksCart.price)}`
         })
     });
 }
