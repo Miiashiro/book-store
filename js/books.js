@@ -100,6 +100,7 @@ const gridBooks = (books) => {
             });
 
             showItemCart()
+            console.log(cartShopping)
         })
     });
 };
@@ -115,6 +116,9 @@ dialog.addEventListener("click", (e) => {
 
 //Mostrar livros no carrinho
 function showItemCart() {
+
+    itemCart.innerHTML = "";
+
     cartShopping.map((booksCart) => {
         //div
         const divCart = document.createElement("div");
@@ -170,7 +174,13 @@ function showItemCart() {
         //Total do preco dos livros no carrinho
         total.innerHTML = `Total: R$ ${parseInt(booksCart.price)}`;
 
-        //funcao nos botoes
+        //Remocao do livro
+        const removeItem = document.createElement("span");
+        removeItem.classList.add("remove_item");
+        removeItem.innerHTML = "X"
+        divCart.appendChild(removeItem);
+
+        //diminui a quantidade de livros do input
         buttonMinus.addEventListener("click", (e) => {
             if(quantityCart.value > 1){
                 booksCart.quantity --;
@@ -178,6 +188,7 @@ function showItemCart() {
             }
         })
 
+        //aumenta a quantidade de livros do input
         buttonPlus.addEventListener("click", (e) => {
             booksCart.quantity ++;
             quantityCart.value = booksCart.quantity;
