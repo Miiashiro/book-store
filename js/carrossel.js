@@ -33,7 +33,7 @@ btnNext.addEventListener('click', controlSlide)
 btnPrev.addEventListener('click', controlSlide)
 
 function automaticNextImage(){
-    if(slideProps.scroll + slideProps.width < parseInt(contentWidth)){
+    if((slideProps.scroll + slideProps.width) < parseInt(contentWidth)){
         slideProps.scroll += slideProps.width
     } else {
         slideProps.scroll = 0;

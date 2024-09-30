@@ -60,6 +60,8 @@ body{
 .modal{
     margin: auto;
     background-color: #ebe4ca;
+    padding: 8px;
+    border-radius: 10px;
 }
 
 /*Titulo do modal*/
@@ -86,6 +88,11 @@ body{
 
 .hide{
     display: none;
+}
+
+.show{
+    display: block;
+    padding: 6px;
 }
 
 /* Envolta do nome */

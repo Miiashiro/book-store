@@ -91,7 +91,7 @@ const gridBooks = (books) => {
         buttonAdd.addEventListener("click", (e) => {
             console.log(books.id); //-------------------------
 
-            buttonAdd.disabled = true;  // Desabilita o botão após o clique
+            buttonAdd.disabled = true;  // Desabilita o botão após o clique, para não dublicar valores no array cartShopping
 
             cartShopping.push({
                 id: books.id,
@@ -102,8 +102,8 @@ const gridBooks = (books) => {
             });
 
             sumPrice += parseInt(books.price);
-            
-            showItemCart();
+
+            showItemCart(buttonAdd);
         })
     });
 };
@@ -112,21 +112,35 @@ const gridBooks = (books) => {
 dialog.addEventListener("click", (e) => {
     modal.showModal();
 
-    if (cartShopping.length > 0) {
-        showBook.classList.add("hide"); //esconde a frase de nao haver livros adicionados
+    //esconde a frase de nao haver livros adicionados
+    if (sumPrice > 0) {
+        showBook.classList.add("hide");
+    } else {
+        showBook.classList.remove("hide");
+        showBook.classList.add("show");
     }
 });
 
 //Mostrar livros no carrinho
-function showItemCart() {
+function showItemCart(btnAdd) {
 
     itemCart.innerHTML = "";
 
-    cartShopping.map((booksCart) => {
+    var count = 0;
+
+    cartShopping.map((booksCart, index) => {
+
+        
+
         //div
         const divCart = document.createElement("div");
         divCart.classList.add("item");
         itemCart.appendChild(divCart);
+
+        //Quando o dialog atualiza as divs perdem a class hide line 223
+        if (booksCart.visible === false) {
+            divCart.classList.toggle("hide"); //Esconde os elementos para que não haja repetição do mesmo apos a deletacao
+        };
 
         //imagem do livro
         const imgItemCart = document.createElement("img");
@@ -166,6 +180,7 @@ function showItemCart() {
         const quantityCart = document.createElement("input");
         quantityCart.classList.add("quantity_cart");
         quantityCart.value = booksCart.quantity;
+        quantityCart.disabled = true;
         wrapQuantCart.appendChild(quantityCart);
 
         //botao de adicionar
@@ -175,7 +190,7 @@ function showItemCart() {
         wrapQuantCart.appendChild(buttonPlus);
 
         //Total do preco dos livros no carrinho
-        total.innerHTML = `Total: R$ ${parseInt(sumPrice)}`;
+        total.innerHTML = `Total: R$ ${sumPrice}`;
 
         //Remocao do livro
         const removeItem = document.createElement("span");
@@ -183,22 +198,35 @@ function showItemCart() {
         removeItem.innerHTML = "X"
         divCart.appendChild(removeItem);
 
-        //diminui a quantidade de livros do input
+        //diminuir a quantidade de livros do input
         buttonMinus.addEventListener("click", (e) => {
-            if(quantityCart.value > 1){
-                booksCart.quantity --;
+            if (quantityCart.value > 1) {
+                booksCart.quantity--;
                 quantityCart.value = booksCart.quantity;
 
                 total.innerHTML = `Total: R$ ${sumPrice -= parseInt(booksCart.price)}`;
             }
         })
 
-        //aumenta a quantidade de livros do input
+        //aumentar a quantidade de livros do input
         buttonPlus.addEventListener("click", (e) => {
-            booksCart.quantity ++;
+            booksCart.quantity++;
             quantityCart.value = booksCart.quantity;
 
             total.innerHTML = `Total: R$ ${sumPrice += parseInt(booksCart.price)}`;
+        })
+
+        //remover livro no carrinho
+        removeItem.addEventListener("click", (e) => {
+            //var result = booksCart.quantity * parseInt(booksCart.price);
+
+            total.innerHTML = `Total: R$ ${sumPrice -= (booksCart.quantity * parseInt(booksCart.price))}`
+
+            cartShopping[index].visible = false; //adiciona uma propriedade para esconder o mesmo
+
+            divCart.classList.add("hide");
+
+            btnAdd.disabled = !btnAdd.disabled; //ativa o botao para adicionar o mesmo livro ao carrinho
         })
     });
 }
