@@ -1,47 +1,87 @@
-const btnNext = document.getElementById('nextSlide')
-const btnPrev = document.getElementById('prevSlide')
-const slider = document.querySelector('.slider')
-const contentImg = document.querySelector('.content-image')
+var slideImages = document.querySelectorAll('.slides img');
+var next = document.querySelector('.next');
+var prev = document.querySelector('.prev');
 
-const { width: slideWidth} = window.getComputedStyle(slider)
-const { width: contentWidth} = window.getComputedStyle(contentImg)
+// Acesso aos indicadores
+var dots = document.querySelectorAll('.dot');
 
-const slideProps = {
-    width: parseInt(slideWidth),
-    scroll: 0
-}
+var counter = 0;
 
-function controlSlide({target: {id}}){
-    switch(id){
-        case 'nextSlide': {
-            if(slideProps.scroll + slideProps.width < parseInt(contentWidth)){
-                slideProps.scroll += slideProps.width
-            }
-            return slider.scrollLeft = slideProps.scroll
-        }
+// Botao de proxima imagem
+next.addEventListener('click', slideNext);
 
-        case 'prevSlide':
-            slideProps.scroll = slideProps.scroll - slideProps.width < 0 ? 0 : slideProps.scroll - slideProps.width 
-            return slider.scrollLeft = slideProps.scroll
-        
-        default:
-            break;
-    }
-}
+function slideNext(){
+    slideImages[counter].style.animation = 'next1 0.5s ease-in forwards';
 
-btnNext.addEventListener('click', controlSlide)
-btnPrev.addEventListener('click', controlSlide)
-
-function automaticNextImage(){
-    if((slideProps.scroll + slideProps.width) < parseInt(contentWidth)){
-        slideProps.scroll += slideProps.width
+    if(counter >= slideImages.length - 1){
+        counter = 0;
     } else {
-        slideProps.scroll = 0;
+        counter++;
     }
 
-    return slider.scrollLeft = slideProps.scroll
+    slideImages[counter].style.animation = 'next2 0.5s ease-in forwards';
+    indicators()
 }
 
-setInterval( function(){
-    automaticNextImage()
-}, 8000)
+// Botao de voltar imagem
+prev.addEventListener('click', slidePrev);
+
+function slidePrev(){
+    slideImages[counter].style.animation = 'prev1 0.5s ease-in forwards';
+
+    if(counter >= slideImages.length - 1){
+        counter = 0;
+    } else {
+        counter++
+    }
+
+    slideImages[counter].style.animation = 'prev2 0.5s ease-in forwards';
+    indicators()
+}
+
+// Auto sliding
+function autoSliding(){
+    deletInterval = setInterval(timer, 4000);
+
+    function timer(){
+        slideNext();
+        indicators()
+    }
+}
+
+autoSliding();
+
+// Parar o slide automatico quando o mouse passar sobre
+const slide = document.querySelector('.slide');
+slide.addEventListener('mouseover', function(){
+    clearInterval(deletInterval);
+})
+
+// Retomar o deslizamento quando o mouse estiver desligado
+slide.addEventListener('mouseout', autoSliding);
+
+// Adicionar e remove a classe active dos indicadores
+function indicators(){
+    for(i=0; i < dots.length; i++){
+        dots[i].className = dots[i].className.replace('active', ' ');
+    };
+    dots[counter].classList += ' active';
+}
+
+function switchImage(currentImage){
+    currentImage.classList.add('active');
+    var imageId = currentImage.getAttribute('attr');
+
+    if(imageId > counter){
+        slideImages[counter].style.animation = 'next1 0.5s ease-in forwards';
+        counter = imageId;
+        slideImages[counter].style.animation = 'next2 0.5s ease-in forwards'
+    } else if(imageId == counter){
+        return;
+    } else {
+        slideImages[counter].style.animation = 'prev1 0.5s ease-in forwards'
+        counter = imageId;
+        slideImages[counter].style.animation = 'prev1 0.5s ease-in forwards'
+    }
+    indicators()
+}
