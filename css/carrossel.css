@@ -90,7 +90,7 @@ span.next:hover, span.prev:hover{
 }
 
 .dotsContainer .active{
-    background-color: #555;
+    background-color: #f7f4ee;
 }
 
 @keyframes next1 {

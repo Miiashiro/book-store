@@ -7,81 +7,91 @@ var dots = document.querySelectorAll('.dot');
 
 var counter = 0;
 
-// Botao de proxima imagem
+// Botao de passar imagem
 next.addEventListener('click', slideNext);
 
-function slideNext(){
+function slideNext() {
     slideImages[counter].style.animation = 'next1 0.5s ease-in forwards';
 
-    if(counter >= slideImages.length - 1){
+    if (counter >= slideImages.length - 1) {
         counter = 0;
     } else {
         counter++;
     }
 
     slideImages[counter].style.animation = 'next2 0.5s ease-in forwards';
-    indicators()
+
+    indicators();
 }
 
 // Botao de voltar imagem
 prev.addEventListener('click', slidePrev);
 
-function slidePrev(){
+function slidePrev() {
     slideImages[counter].style.animation = 'prev1 0.5s ease-in forwards';
 
-    if(counter >= slideImages.length - 1){
+    if (counter >= slideImages.length - 1) {
         counter = 0;
     } else {
-        counter++
+        counter++;
     }
 
     slideImages[counter].style.animation = 'prev2 0.5s ease-in forwards';
-    indicators()
+    
+    indicators();
 }
 
 // Auto sliding
-function autoSliding(){
-    deletInterval = setInterval(timer, 4000);
+function autoSliding() {
+    deletInterval = setInterval(timer, 5000);
 
-    function timer(){
+    function timer() {
         slideNext();
-        indicators()
+        indicators();
     }
 }
 
 autoSliding();
 
-// Parar o slide automatico quando o mouse passar sobre
+// Parar o slide automatico quando o mouse ficar sobre
 const slide = document.querySelector('.slide');
-slide.addEventListener('mouseover', function(){
-    clearInterval(deletInterval);
-})
 
-// Retomar o deslizamento quando o mouse estiver desligado
+slide.addEventListener('mouseover', function () {
+    clearInterval(deletInterval);
+});
+
+// Inicia o slide automatico quando o mouse não esta sobre
 slide.addEventListener('mouseout', autoSliding);
 
 // Adicionar e remove a classe active dos indicadores
-function indicators(){
-    for(i=0; i < dots.length; i++){
+function indicators() {
+    for (i = 0; i < dots.length; i++) {
         dots[i].className = dots[i].className.replace('active', ' ');
-    };
-    dots[counter].classList += ' active';
+    }
+
+    dots[counter].className += ' active';
 }
 
-function switchImage(currentImage){
+function switchImage(currentImage) {
     currentImage.classList.add('active');
+
     var imageId = currentImage.getAttribute('attr');
 
-    if(imageId > counter){
+    if (imageId > counter) {
         slideImages[counter].style.animation = 'next1 0.5s ease-in forwards';
+
         counter = imageId;
-        slideImages[counter].style.animation = 'next2 0.5s ease-in forwards'
-    } else if(imageId == counter){
+        
+        slideImages[counter].style.animation = 'next2 0.5s ease-in forwards';
+    } else if (imageId == counter) {
         return;
     } else {
-        slideImages[counter].style.animation = 'prev1 0.5s ease-in forwards'
+        slideImages[counter].style.animation = 'prev1 0.5s ease-in forwards';
+        
         counter = imageId;
-        slideImages[counter].style.animation = 'prev1 0.5s ease-in forwards'
+        
+        slideImages[counter].style.animation = 'prev2 0.5s ease-in forwards';
     }
-    indicators()
+
+    indicators();
 }

@@ -98,7 +98,7 @@ body{
 /* Envolta do nome */
 .wrap_name_cart{
     display: block;
-    width: 100%;
+    width: 40%;
     overflow-wrap: break-word;
 }
 
