@@ -72,6 +72,11 @@ body{
     padding-bottom: 10px;
 }
 
+.modal > span{
+    font-size: 18px;
+    padding: 6px;
+}
+
 /*Livros*/
 .item{
     padding: 10px;
@@ -92,7 +97,6 @@ body{
 
 .show{
     display: block;
-    padding: 6px;
 }
 
 /* Envolta do nome */

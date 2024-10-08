@@ -30,7 +30,21 @@ a{
     color: black;
 }
 
+.wrap-cart{
+    position: relative;
+}
+
 .carrinho-ico{
     width: 22px;
     height: 22px;
+}
+
+nav ul li div{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: red;
+    top: 0;
+    right: 16px;
 }

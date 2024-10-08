@@ -4,6 +4,7 @@ var modal = document.querySelector('.modal');
 var itemCart = document.querySelector('.itens');
 var showBook = document.querySelector('#show');
 var total = document.querySelector('.total');
+var badge = document.querySelector('#badge')
 
 var sumPrice = 0;
 
@@ -88,9 +89,7 @@ const gridBooks = (books) => {
         div.appendChild(buttonAdd);
 
         //adiciona no array o livro que o usuario clicou
-        buttonAdd.addEventListener("click", (e) => {
-            console.log(books.id); //-------------------------
-
+        buttonAdd.addEventListener("click", function(){
             buttonAdd.disabled = true;  // Desabilita o botão após o clique, para não dublicar valores no array cartShopping
 
             cartShopping.push({
@@ -104,20 +103,19 @@ const gridBooks = (books) => {
             sumPrice += parseInt(books.price);
 
             showItemCart(buttonAdd);
+
+            badge.className = badge.className.replace('hide', 'show');
         })
     });
 };
 
 //Abrir o modal do carrinho de vendas
-dialog.addEventListener("click", (e) => {
+dialog.addEventListener("click", function(){
     modal.showModal();
 
     //esconde a frase de nao haver livros adicionados
     if (sumPrice > 0) {
         showBook.classList.add("hide");
-    } else {
-        showBook.classList.remove("hide");
-        showBook.classList.add("show");
     }
 });
 
@@ -126,12 +124,7 @@ function showItemCart(btnAdd) {
 
     itemCart.innerHTML = "";
 
-    var count = 0;
-
     cartShopping.map((booksCart, index) => {
-
-        
-
         //div
         const divCart = document.createElement("div");
         divCart.classList.add("item");
@@ -199,7 +192,7 @@ function showItemCart(btnAdd) {
         divCart.appendChild(removeItem);
 
         //diminuir a quantidade de livros do input
-        buttonMinus.addEventListener("click", (e) => {
+        buttonMinus.addEventListener("click", function(){
             if (quantityCart.value > 1) {
                 booksCart.quantity--;
                 quantityCart.value = booksCart.quantity;
@@ -209,7 +202,7 @@ function showItemCart(btnAdd) {
         })
 
         //aumentar a quantidade de livros do input
-        buttonPlus.addEventListener("click", (e) => {
+        buttonPlus.addEventListener("click", function(){
             booksCart.quantity++;
             quantityCart.value = booksCart.quantity;
 
@@ -217,9 +210,7 @@ function showItemCart(btnAdd) {
         })
 
         //remover livro no carrinho
-        removeItem.addEventListener("click", (e) => {
-            //var result = booksCart.quantity * parseInt(booksCart.price);
-
+        removeItem.addEventListener("click", function(){
             total.innerHTML = `Total: R$ ${sumPrice -= (booksCart.quantity * parseInt(booksCart.price))}`
 
             cartShopping[index].visible = false; //adiciona uma propriedade para esconder o mesmo
@@ -227,6 +218,11 @@ function showItemCart(btnAdd) {
             divCart.classList.add("hide");
 
             btnAdd.disabled = !btnAdd.disabled; //ativa o botao para adicionar o mesmo livro ao carrinho
+
+            if(sumPrice == 0){
+                badge.className = badge.className.replace('show', 'hide');
+                showBook.className = showBook.className.replace('hide', 'show');
+            }
         })
     });
 }
