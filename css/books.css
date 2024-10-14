@@ -1,15 +1,3 @@
-/**{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body{
-    height: 100vh;
-    background-color: #eae9e9;
-}
-*/
-
 /*livro no site*/
 .container{
     margin: auto;
@@ -64,7 +52,7 @@ body{
     border-radius: 10px;
 }
 
-/*Titulo do modal*/
+/* titulo do modal */
 .modal > h2{
     display: flex;
     justify-content: center;
@@ -72,12 +60,13 @@ body{
     padding-bottom: 10px;
 }
 
+/* frase de nao haver livros */
 .modal > span{
     font-size: 18px;
     padding: 6px;
 }
 
-/*Livros*/
+/* livros no carrinho */
 .item{
     padding: 10px;
     border-top: 2px solid #000;
@@ -91,6 +80,7 @@ body{
     height: 10%;
 }
 
+/* esconde e mostra o livro */
 .hide{
     display: none;
 }
@@ -99,7 +89,7 @@ body{
     display: block;
 }
 
-/* Envolta do nome */
+/* envolta do nome do livro */
 .wrap_name_cart{
     display: block;
     width: 40%;
@@ -120,7 +110,7 @@ body{
     border-radius: 10px;
 } 
 
-/* botoes de remover e adicionar quantidades*/
+/* botoes de remover e adicionar quantidades */
 .item > .wrap_quant_cart > .button_minus, .item > .wrap_quant_cart > .button_plus{
     padding: 5px;
     border: none;
@@ -136,13 +126,14 @@ body{
     margin-right: 5px;
     border: none;
     background-color: rgb(255, 255, 255);
+    color: #000;
 }
 
 .item > .wrap_quant_cart > .quantity_cart:focus{
     outline: 0;
 }
 
-/* envolta do botao de comprar*/
+/* envolta do botao de comprar */
 .button_buy{
     display: flex;
     width: 100%;
@@ -160,7 +151,7 @@ body{
     color: #fff;
 }
 
-/* envolta do total*/
+/* envolta do total */
 .wrap_total{
     width: 100%;
     border-top: 2px solid #000;
@@ -173,7 +164,7 @@ body{
     font-size: 20px;
 }
 
-/* x de excluir o livro do carrinho*/
+/* excluir o livro do carrinho */
 .remove_item{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
