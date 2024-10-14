@@ -2,7 +2,7 @@ var container = document.querySelector('.container');
 var dialog = document.querySelector('.carrinho-ico');
 var modal = document.querySelector('.modal');
 var itemCart = document.querySelector('.itens');
-var showBook = document.querySelector('#show');
+var showSpan = document.querySelector('#show');
 var total = document.querySelector('.total');
 var badge = document.querySelector('#badge')
 
@@ -90,7 +90,7 @@ const gridBooks = (books) => {
 
         //adiciona no array o livro que o usuario clicou
         buttonAdd.addEventListener("click", function(){
-            buttonAdd.disabled = true;  // Desabilita o botão após o clique, para não dublicar valores no array cartShopping
+            buttonAdd.setAttribute("disabled", "true");  // Desabilita o botão após o clique, para não dublicar valores no array cartShopping
 
             cartShopping.push({
                 id: books.id,
@@ -115,7 +115,10 @@ dialog.addEventListener("click", function(){
 
     //esconde a frase de nao haver livros adicionados
     if (sumPrice > 0) {
-        showBook.classList.add("hide");
+        if(showSpan.className == "show"){
+            showSpan.classList.remove("show")
+        }
+        showSpan.classList.add("hide");
     }
 });
 
@@ -213,16 +216,23 @@ function showItemCart(btnAdd) {
         removeItem.addEventListener("click", function(){
             total.innerHTML = `Total: R$ ${sumPrice -= (booksCart.quantity * parseInt(booksCart.price))}`
 
-            cartShopping[index].visible = false; //adiciona uma propriedade para esconder o mesmo
+            cartShopping[index].visible = false; //adiciona uma propriedade para esconder o elemento
 
-            divCart.classList.add("hide");
-
-            btnAdd.disabled = !btnAdd.disabled; //ativa o botao para adicionar o mesmo livro ao carrinho
-
+            
+            //btnAdd.disabled = !btnAdd.disabled; //ativa o botao para adicionar o mesmo livro ao carrinho
+            
             if(sumPrice == 0){
                 badge.className = badge.className.replace('show', 'hide');
-                showBook.className = showBook.className.replace('hide', 'show');
+                showSpan.className = showSpan.className.replace('hide', 'show');
             }
+
+            
+            if(btnAdd.disabled === true){
+//                btnAdd.removeAttribute("disabled"); //ativa o botao para adicionar o mesmo livro ao carrinho
+//                btnAdd.disabled = false;
+                console.log(btnAdd)
+            }
+            divCart.classList.add("hide");
         })
     });
 }
