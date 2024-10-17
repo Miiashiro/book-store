@@ -21,37 +21,37 @@ const books = [
         id: 1,
         bookName: "Paulo aposto e os desafios da evangelização",
         price: "100,00",
-        img: "../imgs/books/paulo_apostolo.PNG"
+        img: "./imgs/books/paulo_apostolo.PNG"
     },
     {
         id: 2,
         bookName: "O Espadachim de Carvão",
         price: "100,00",
-        img: "../imgs/books/espadachim_de_carvao.PNG"
+        img: "./imgs/books/espadachim_de_carvao.PNG"
     },
     {
         id: 3,
         bookName: "Harry Potter e a Pedra Filosofal",
         price: "100,00",
-        img: "../imgs/books/harry_potter.PNG"
+        img: "./imgs/books/harry_potter.PNG"
     },
     {
         id: 4,
         bookName: "Dom Casmurro",
         price: "100,00",
-        img: "../imgs/books/dom_casmurro.PNG"
+        img: "./imgs/books/dom_casmurro.PNG"
     },
     {
         id: 5,
         bookName: "Senhor dos Aneis a Sociedade do Anel",
         price: "100,00",
-        img: "../imgs/books/senhor_dos_aneis.PNG"
+        img: "./imgs/books/senhor_dos_aneis.PNG"
     },
     {
         id: 6,
         bookName: "Os segredos da mente milionária",
         price: "100,00",
-        img: "../imgs/books/mente_milionaria.PNG"
+        img: "./imgs/books/mente_milionaria.PNG"
     }
 ];
 
