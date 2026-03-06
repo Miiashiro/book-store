@@ -1,4 +1,5 @@
 📚 Projeto Livraria
+
 Este projeto consiste no desenvolvimento de uma aplicação de livraria virtual, que utiliza a API da Open Library para buscar e exibir informações sobre livros.
 
 A aplicação permite consultar títulos, autores e capas de livros diretamente da base de dados da Open Library, demonstrando na prática a integração com APIs públicas e o consumo de dados externos em aplicações web.
