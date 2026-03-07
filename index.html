@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>teste</title>
     <link rel="stylesheet" href="./Style/style.css">
+    <link rel="stylesheet" href="./Style/carrossel.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="./Js/carrossel.js" defer></script>
 </head>
 
 <body>
@@ -25,7 +27,24 @@
         </div>
     </header>
     <main>
-        hello world
+        <section class="slide">
+            <div class="slides">
+                <img src="./Images/banner-leitura-aconchegante.jpg" alt="Livro aberto com ilustrações de mundos fantásticos saindo das páginas" class="active">
+                <img src="./Images/biblioteca.png" alt="Biblioteca">
+                <img src="./Images/promo-novos-titulos.png" alt="Mesa de madeira com um livro aberto e uma xícara de café ao lado, criando um ambiente acolhedor para a leitura">
+            </div>
+
+            <div class="buttons">
+                <span class="next">&#10095;</span>
+                <span class="prev">&#10094;</span>
+            </div>
+
+            <div class="dots-container">
+                <div class="dot active" attr="0" onclick="switchImage(this)"></div>
+                <div class="dot" attr="1" onclick="switchImage(this)"></div>
+                <div class="dot" attr="2" onclick="switchImage(this)"></div>
+            </div>
+        </section>
     </main>
 </body>
 
