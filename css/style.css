@@ -1,0 +1,141 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #e3e3e3;
+}
+
+.interface{
+    max-width: 1380px;
+    margin: 0 auto;
+    padding: 0 1%;
+}
+
+section.categories, section.books-grid{
+    margin: 20px 0;
+}
+
+/*cabeçalho*/
+header{
+    width: 100%;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    gap: 4%;
+    background-color: #fff;
+}
+
+/*logo*/
+.container-logo{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+
+.logo-image{
+    width: 50%;
+    height: 100%;
+}
+
+/*nome da loja*/
+.container-logo strong{
+    font-size: clamp(1rem, 3vw, 2rem);
+}
+
+.name-two{
+    color: rgb(43, 43, 227);
+}
+
+/*barra de pesquisa*/
+.container-search{
+    background-color: #f1f1f1;
+    width: 40%;
+    height: 60%;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-radius: 20px;
+    gap: 8px;
+}
+
+.container-search input{
+    height: 100%;
+    width: 100%;
+    border: none;
+    margin-left: 1%;
+    outline: 0;
+    background-color: #f1f1f1;
+    border-radius: 20px;
+    font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+}
+
+/*icone de pesquisa*/
+.container-search i{
+    font-size: clamp(0.9rem, 2vw, 1.3rem);
+    color: #555;
+    margin-left: 2px;
+}
+
+/*icone do carrinho*/
+.container-cart{
+    font-size: clamp(0.9rem, 2vw, 1.3rem);
+}
+
+/* Card dos livros */
+.book-container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.book-card{
+    background-color: #fff;
+    border-radius: 0 0 15px 15px;
+    display: flex;
+    flex-direction: column;
+    
+    width: 100%;        /* ocupa a coluna */
+    height: auto;
+}
+
+.book-card .book-image {
+    width: 100%;
+    aspect-ratio: 3 / 4; /* mantém proporção tipo capa de livro */
+}
+
+.book-card img {
+    width: 100%;
+    height: 100%;
+
+}
+
+.book-card .txt-book{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    height: 100%;
+}
+
+.book-card .txt-book .name-book{
+    font-weight: 800;
+    padding: 5px 0 0 0;
+}
+
+.book-card .txt-book .authors{
+    color: rgb(165, 165, 165);
+}
+
+.book-card .txt-book .rating{
+    font-weight: 200;
+}
+
+.book-card .txt-book .buy{
+    margin-top: auto;
+
+    display: flex;
+    justify-content: space-between;
+}

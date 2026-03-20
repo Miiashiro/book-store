@@ -5,16 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>teste</title>
-    <link rel="stylesheet" href="./Style/style.css">
-    <link rel="stylesheet" href="./Style/carrossel.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/carrossel.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <script src="./Js/carrossel.js" defer></script>
+    <script src="./js/index.js" defer></script>
+    <script src="./js/carrossel.js" defer></script>
 </head>
 
 <body>
     <header>
         <div class="container-logo">
-            <img src="./Images/logo-loja.png" alt="logo da loja" class="logo-image">
+            <img src="./images/logo-loja.png" alt="logo da loja" class="logo-image">
             <strong><span class="name-one">Book</span><span class="name-two">Verse</span></strong>
         </div>
 
@@ -29,9 +30,9 @@
     <main>
         <section class="slide">
             <div class="slides">
-                <img src="./Images/banner-leitura-aconchegante.jpg" alt="Livro aberto com ilustrações de mundos fantásticos saindo das páginas" class="active">
-                <img src="./Images/biblioteca.png" alt="Biblioteca">
-                <img src="./Images/promo-novos-titulos.png" alt="Mesa de madeira com um livro aberto e uma xícara de café ao lado, criando um ambiente acolhedor para a leitura">
+                <img src="./images/banner-leitura-aconchegante.jpg" alt="Livro aberto com ilustrações de mundos fantásticos saindo das páginas" class="active">
+                <img src="./images/biblioteca.png" alt="Biblioteca">
+                <img src="./images/promo-novos-titulos.png" alt="Mesa de madeira com um livro aberto e uma xícara de café ao lado, criando um ambiente acolhedor para a leitura">
             </div>
 
             <div class="buttons">
@@ -45,6 +46,39 @@
                 <div class="dot" attr="2" onclick="switchImage(this)"></div>
             </div>
         </section>
+
+        <section class="categories">
+            <div class="interface">
+                <div>
+                    <span>Categoria</span>
+                </div>
+    
+                <div>
+                    <button>Todos</button>
+                    <button>Romance</button>
+                    <button>Ficção cientifica</button>
+                    <button>Fantasia</button>
+                    <button>Biografia</button>
+                    <button>Auto Ajuda</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="books">
+            <div class="interface">
+                <div>
+                    <span>20 livros encontrados</span>
+                </div>
+    
+                <div class="book-container" id="book-container">
+                    
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            Footer
+        </footer>
     </main>
 </body>
 
