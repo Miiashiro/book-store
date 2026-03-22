@@ -66,6 +66,7 @@ async function fetchBooks() {
 
             let priceTxt = "Indisponível";
 
+            // Verificar se o livro está à venda e formatar o preço
             if (price?.saleability === "FOR_SALE") {
                 const value = price.listPrice.amount;
 
