@@ -79,3 +79,10 @@ header{
 .container-cart{
     font-size: clamp(0.9rem, 2vw, 1.3rem);
 }
+
+/* seção sobre */
+.img-about, .txt-about{
+    display: inline-block;
+    width: 50%;
+    margin-right: -4px;
+}
