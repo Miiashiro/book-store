@@ -5,9 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>teste</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/carrossel.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/book-card.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js" defer></script>
     <script src="./js/index.js" defer></script>
     <script src="./js/carrossel.js" defer></script>
 </head>
@@ -20,8 +25,8 @@
         </div>
 
         <div class="container-search">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="search" placeholder="Buscar por título ou autor...">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" placeholder="Buscar por título ou autor...">
         </div>
         <div class="container-cart">
             <i class="fa-solid fa-cart-shopping"></i>
@@ -30,9 +35,11 @@
     <main>
         <section class="slide">
             <div class="slides">
-                <img src="./images/banner-leitura-aconchegante.jpg" alt="Livro aberto com ilustrações de mundos fantásticos saindo das páginas" class="active">
+                <img src="./images/banner-leitura-aconchegante.jpg"
+                    alt="Livro aberto com ilustrações de mundos fantásticos saindo das páginas" class="active">
                 <img src="./images/biblioteca.png" alt="Biblioteca">
-                <img src="./images/promo-novos-titulos.png" alt="Mesa de madeira com um livro aberto e uma xícara de café ao lado, criando um ambiente acolhedor para a leitura">
+                <img src="./images/promo-novos-titulos.png"
+                    alt="Mesa de madeira com um livro aberto e uma xícara de café ao lado, criando um ambiente acolhedor para a leitura">
             </div>
 
             <div class="buttons">
@@ -47,7 +54,20 @@
             </div>
         </section>
 
-       
+        <section class="carousel-wrapper">
+            <div class="interface">
+                <div>
+                    <span>Mais Livros &#10095;</span>
+                </div>
+                <div id="meu-carrossel" class="splide">
+                    <div class="splide__track">
+                        <ul class="splide__list" id="splide-list">
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <footer>
             Footer

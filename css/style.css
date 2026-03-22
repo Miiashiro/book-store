@@ -5,17 +5,17 @@
 }
 
 body{
-    background-color: #ececec;
+    background-color: #f6f6f6;
+}
+
+section.carousel-wrapper{
+    margin: 20px 0;
 }
 
 .interface{
     max-width: 1380px;
     margin: 0 auto;
     padding: 0 1%;
-}
-
-section.categories, section.books-grid{
-    margin: 20px 0;
 }
 
 /*cabeçalho*/
@@ -78,111 +78,4 @@ header{
 
 .container-cart{
     font-size: clamp(0.9rem, 2vw, 1.3rem);
-}
-
-/* Card dos livros */
-.book-container{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-}
-
-.book-card{
-    background-color: #fff;
-    border-radius: 0 0 15px 15px;
-    display: flex;
-    flex-direction: column;
-    
-    width: 100%;        
-    height: 100%;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.book-card:hover{
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transform: translateY(-5px);
-}
-
-.book-card .book-image {
-    height: 60%;
-}
-
-.book-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* garante que a imagem preencha o espaço sem distorção */
-}
-
-.book-card .txt-book{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-}
-.category {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-}
-
-.category span {
-    border: 1px solid #ccc;
-    padding: 3px 8px;
-    border-radius: 8px;
-    font-size: 12px;
-    background-color: #f5f5f5;
-}
-
-.book-card .txt-book .name-book{
-    font-weight: 800;
-    padding: 5px 0 0 0;
-}
-
-.book-card .txt-book .authors{
-    color: rgb(165, 165, 165);
-}
-
-.book-card .txt-book .rating{
-    font-weight: 200;
-    margin-bottom: 8px;
-}
-
-.txt-book .rating i{
-    color: rgb(255, 193, 7);
-    margin-right: 4px;
-}
-
-.name-book, .authors, .rating{
-    margin: 3px 0;
-}
-
-.book-card .txt-book .buy{
-    margin-top: auto;
-
-    display: flex;
-    justify-content: space-between;
-}
-
-.buy .price{
-    font-weight: bold;
-    color: rgb(39, 39, 198);
-    font-size: 1.5em;
-}
-
-.buy button{
-    border-radius: 15px;
-    padding: 8px;
-    border: none;
-    color: #fff;
-    background-color: rgb(39, 39, 198);
-    cursor: pointer;
-}
-
-.buy button:hover{
-    background-color: rgb(29, 29, 148);
-}
-
-.buy button i, .buy button span{
-    margin: 0 8px;
 }
