@@ -1,7 +1,57 @@
 /* Card dos livros da página de mais livros*/
+section.book-wrapper{
+    margin-top: 2%;
+}
+
+.book-wrapper .interface{
+    display: flex;
+    /* background-color: red; */
+}
+
+.filters{
+    width: 20%;
+    padding: 5px;
+}
+
+.filters .categories{
+    padding-top: 4%;
+}
+.type-category{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.type-category button{
+    width: 100%;
+    text-align: center;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 20px;
+    background: #eee;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.type-category button:hover{
+    background: #2d2dbb;
+    color: #fff;
+}
+
+.type-category button.active{
+    background: #2d2dbb;
+    color: #fff;
+}
+
+.books{
+    width: 80%;
+    padding: 5px;
+}
+
 .book-container{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     gap: 25px;
 }
 

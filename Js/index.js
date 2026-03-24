@@ -1,5 +1,8 @@
 const container = document.querySelector("#book-container");
 const carouselList = document.querySelector("#splide-list");
+const categoryContainer = document.querySelector(".type-category");
+
+let allBooks = [];
 
 const mockData = {
     items: [
@@ -71,75 +74,13 @@ async function fetchBooks() {
     }
 }*/
 
-async function renderBooksPage() {
-    /*const books = await fetchBooks();
-
-    if (books.length === 0) {
-        container.innerHTML = "<p>Nenhum livro encontrado.</p>";
-        return;
-    }*/
-
-    const data = mockData;
-    const books = data.items;
-
-    console.log(books);
-
-    let cardText = '';
-
-    books.forEach(book => {
-        const info = book.volumeInfo;
-        const price = book.saleInfo;
-
-        const title = info.title;
-        const categories = info.categories
-            ? info.categories.map(cat => `<span class="category">${cat}</span>`).join(" ")
-            : `<span class="category">Sem categoria</span>`;
-        const authors = info.authors ? info.authors.join(", ") : "Autor Desconhecido";
-        const rating = info.averageRating ? info.averageRating : "Sem avaliação";
-        const thumbnail = info.imageLinks ? info.imageLinks.thumbnail : 'https://via.placeholder.com/128x192?text=Sem+Capa';
-
-        let priceTxt = "Indisponível";
-
-        // Verificar se o livro está à venda e formatar o preço
-        if (price?.saleability === "FOR_SALE") {
-            const value = price.listPrice.amount;
-
-            priceTxt = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
-        }
-        //<img src=${thumbnail} alt="Capa do livro ${title}">
-        cardText += `
-                <article class="book-card">
-                    <div class="book-image">
-                        <img src="./images/teste.png" alt="Capa do livro ${title}">
-                    </div>
-                    <div class="txt-book">
-                        <div class="category">
-                            ${categories}
-                        </div>
-                        <span class="name-book">${title}</span>
-                        <span class="authors">${authors}</span>
-                        <span class="rating"><i class="fa-solid fa-star"></i> ${rating}</span>
-                        <div class="buy">
-                            <span class="price">${priceTxt}</span>
-                            <button>
-                                <i class="fa-solid fa-cart-shopping"></i>
-                                <span>Comprar</span>
-                            </button>
-                        </div>
-                    </div>
-                </article>
-            `;
-    });
-
-    container.innerHTML = cardText;
-}
-
 document.addEventListener("DOMContentLoaded", async () => {
     /*const bookCarousel = await fetchBooks()*/
     const data = mockData.items;
     console.log(data)
     const books = data.slice(0, 10);
 
+    let categoryFilterText = '';
     let cardText = '';
 
     books.forEach(book => {
@@ -213,5 +154,110 @@ document.addEventListener("DOMContentLoaded", async () => {
     }).mount();
 })
 
+function renderBooksPage(filteredBook = allBooks) {
+    /*const books = await fetchBooks();
+
+    if (books.length === 0) {
+        container.innerHTML = "<p>Nenhum livro encontrado.</p>";
+        return;
+    }*/
+    let cardText = '';
+
+    filteredBook.forEach(book => {
+        const info = book.volumeInfo;
+        const price = book.saleInfo;
+
+        const title = info.title;
+        const categories = info.categories
+            ? info.categories.map(cat => `<span class="category">${cat}</span>`).join(" ")
+            : `<span class="category">Sem categoria</span>`;
+        const authors = info.authors ? info.authors.join(", ") : "Autor Desconhecido";
+        const rating = info.averageRating ? info.averageRating : "Sem avaliação";
+        const thumbnail = info.imageLinks ? info.imageLinks.thumbnail : 'https://via.placeholder.com/128x192?text=Sem+Capa';
+
+        let priceTxt = "Indisponível";
+
+        // Verificar se o livro está à venda e formatar o preço
+        if (price?.saleability === "FOR_SALE") {
+            const value = price.listPrice.amount;
+
+            priceTxt = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+        }
+        //<img src=${thumbnail} alt="Capa do livro ${title}">
+        cardText += `
+                <article class="book-card">
+                    <div class="book-image">
+                        <img src="./images/teste.png" alt="Capa do livro ${title}">
+                    </div>
+                    <div class="txt-book">
+                        <div class="category">
+                            ${categories}
+                        </div>
+                        <span class="name-book">${title}</span>
+                        <span class="authors">${authors}</span>
+                        <span class="rating"><i class="fa-solid fa-star"></i> ${rating}</span>
+                        <div class="buy">
+                            <span class="price">${priceTxt}</span>
+                            <button>
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <span>Comprar</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            `;
+    });
+
+    container.innerHTML = cardText;
+}
+
+// Filtragem dos livros
+function filterBooks(category){
+    if(category === "Todos"){
+        renderBooksPage(allBooks);
+        return;
+    };
+
+    const filtered = allBooks.filter(book =>
+        book.volumeInfo.categories?.includes(category)
+    );
+
+    renderBooksPage(filtered);
+};
+
+// Criação da seção dos botões para filtrar os livros
+function createCategoryButtons(){
+    const allCategories = allBooks.flatMap(book =>
+        book.volumeInfo.categories || []
+    );
+
+    const uniqueCategories = ["Todos", ...new Set(allCategories)];
+
+    uniqueCategories.forEach(category => {
+        const btn = document.createElement("button");
+        btn.textContent = category;
+
+        btn.addEventListener("click", () => {
+            document.querySelectorAll(".type-category button")
+                .forEach(b => b.classList.remove("active"));
+
+            btn.classList.add("active");
+
+            filterBooks(category);
+        });
+
+        categoryContainer.appendChild(btn);
+    });
+}
+
 //fetchBooks();
-renderBooksPage();
+document.addEventListener("DOMContentLoaded", () => {
+    const container = document.querySelector("#book-container");
+
+    if(!container) return
+
+    allBooks = mockData.items;
+
+    renderBooksPage(allBooks)
+    createCategoryButtons()
+})
