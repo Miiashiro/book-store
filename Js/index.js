@@ -74,6 +74,7 @@ async function fetchBooks() {
     }
 }*/
 
+// Carrossel dos livros da home-page
 document.addEventListener("DOMContentLoaded", async () => {
     /*const bookCarousel = await fetchBooks()*/
     const data = mockData.items;
@@ -106,8 +107,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         cardText += `
             <li class="splide__slide">
-                <article class="card-carrossel">
-                    <div class="book-image-carrossel">
+                <article class="card-carousel">
+                    <div class="book-image-carousel">
                         <img src="./images/teste.png" alt="Capa do livro ${title}">
                     </div>
                     <div class="txt-book">
@@ -132,7 +133,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     carouselList.innerHTML = cardText;
 
-    new Splide('#meu-carrossel', {
+    new Splide('#my-carousel', {
         type   : 'loop',
         perPage: 5,      // Quantos cards visíveis
         perMove: 5,      // PULA de 5 em 5 (isso gera apenas 2 bolinhas se tiver 10 itens)
@@ -155,12 +156,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 })
 
 function renderBooksPage(filteredBook = allBooks) {
-    /*const books = await fetchBooks();
-
-    if (books.length === 0) {
-        container.innerHTML = "<p>Nenhum livro encontrado.</p>";
-        return;
-    }*/
     let cardText = '';
 
     filteredBook.forEach(book => {
@@ -255,6 +250,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const container = document.querySelector("#book-container");
 
     if(!container) return
+    
+    /*const books = await fetchBooks();
+
+    if (books.length === 0) {
+        container.innerHTML = "<p>Nenhum livro encontrado.</p>";
+        return;
+    }*/
 
     allBooks = mockData.items;
 
