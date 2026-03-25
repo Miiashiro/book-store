@@ -7,15 +7,17 @@ section.book-wrapper{
     display: flex;
 }
 
-.filters{
+.filters-container{
     width: 20%;
     padding: 5px;
 }
 
-.filters .categories{
+.filters-container .categories{
     padding-top: 4%;
+    padding-bottom: 7%;
     position: sticky;
     top: 10%;
+    border-bottom: 1px solid #b7b7b7;
 }
 
 .categories .title-category{
@@ -49,6 +51,24 @@ section.book-wrapper{
 .type-category button.active{
     background: #2d2dbb;
     color: #fff;
+}
+
+.filters-container .price-filter{
+    padding-top: 7%;
+    padding-bottom: 10%;
+    position: sticky;
+    top: 39%;
+}
+
+.filters-container .price-filter input{
+    width: 47%;
+    padding: 4px;
+    border-radius: 4px;
+    border: none;
+}
+
+.filters-container .price-filter input:focus{
+    outline: 0;
 }
 
 .books{
