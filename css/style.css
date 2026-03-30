@@ -83,6 +83,28 @@ header{
 
 .container-cart{
     font-size: clamp(0.9rem, 2vw, 1.3rem);
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+}
+
+.container-cart div{
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    background-color: red;
+    border-radius: 50%;
+    top: -20%;
+    right: -15%;
+}
+
+.hide{
+    display: none;
+}
+
+.container-cart .show{
+    display: block;
 }
 
 /* seção sobre */

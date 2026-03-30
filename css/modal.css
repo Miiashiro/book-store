@@ -1,0 +1,90 @@
+dialog.modal{
+    margin: auto;
+    background-color: #ebe4ca;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.modal h2{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.items-cart{
+    display: flex;
+    padding: 10px;
+    border-top: 2px solid #000;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.txt-none-item{
+    font-size: 18px;
+}
+
+.items-cart img{
+    width: 20%;
+    height: 20%;
+}
+
+.items-cart .quant-button-wrap{
+    background-color: #fff;
+    display: flex;
+    border-radius: 10px;
+    padding: 2px;
+}
+
+.quant-button-wrap .minus, .quant-button-wrap .plus{
+    border: none;
+    padding: 3px;
+    background-color: #fff;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.items-cart .delete-item{
+    color: red;
+    cursor: pointer;
+}
+
+.quant-button-wrap input{
+    border: none;
+    padding-left: 10px;
+    width: 100px;
+}
+
+.quant-button-wrap input:focus{
+    outline: none;
+}
+
+.total-wrapper{
+    width: 100%;
+    border-top: 2px solid #000;
+    display: flex;
+    justify-content: end;
+}
+
+.buy-wrapper-cart{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 8px;
+}
+
+.buy-wrapper-cart button{
+    width: 50%;
+    padding: 8px;
+    border-radius: 10px;
+    background-color: #5b6096c3;
+    color: #fff;
+    cursor: pointer;
+}
+
+.buy-wrapper-cart button:hover{
+    background-color: #494d78c3;
+}
