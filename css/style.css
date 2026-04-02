@@ -35,8 +35,13 @@ header{
 
 .container-logo{
     height: 100%;
+}
+
+.container-logo a{
+    height: 100%;
     display: flex;
     align-items: center;
+    text-decoration: none;
 }
 
 .logo-image{
@@ -44,8 +49,12 @@ header{
     height: 100%;
 }
 
-.container-logo strong{
+.container-logo a strong{
     font-size: clamp(1rem, 3vw, 2rem);
+}
+
+.name-one{
+    color: #000;
 }
 
 .name-two{
@@ -73,6 +82,12 @@ header{
     background-color: #f1f1f1;
     border-radius: 20px;
     font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+}
+
+.container-search button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }
 
 .container-search i{

@@ -435,6 +435,19 @@ function filterByPrice() {
 };
 
 
+function filterByName(){
+    const parametrosUrl = new URLSearchParams(window.location.search);
+    const termoDeBusca = parametrosUrl.get("search");
+
+    const filtered = allBooks.filter(book => {
+        const name = book.volumeInfo.title;
+        const lowerSearch = termoDeBusca.toLocaleLowerCase()
+
+        return name.toLocaleLowerCase().includes(lowerSearch)
+    })
+
+    renderBooksPage(filtered);
+}
 
 //fetchBooks();
 document.addEventListener("DOMContentLoaded", () => {
@@ -447,6 +460,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     renderBooksPage(allBooks)
     createCategoryButtons()
+
+    filterByName();
 
     if (inputMinPrice && inputMaxPrice) {
         inputMinPrice.addEventListener("input", filterByPrice);

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/carrossel.css">
     <link rel="stylesheet" href="./css/book-card.css">
+    <link rel="stylesheet" href="./css/modal.css">
 
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js" defer></script>
     <script src="./js/index.js" defer></script>
@@ -20,14 +21,18 @@
 <body>
     <header>
         <div class="container-logo">
-            <img src="./images/logo-loja.png" alt="logo da loja" class="logo-image">
-            <strong><span class="name-one">Book</span><span class="name-two">Verse</span></strong>
+            <a href="./index.html">
+                <img src="./images/logo-loja.png" alt="logo da loja" class="logo-image">
+                <strong><span class="name-one">Book</span><span class="name-two">Verse</span></strong>
+            </a>
         </div>
 
-        <div class="container-search">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="search" placeholder="Buscar por título ou autor...">
-        </div>
+        <form class="container-search" action="book-page.html" method="get">
+            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            
+            <input type="search" name="search" placeholder="Buscar por título...">
+        </form>
+
         <div class="container-cart">
             <i class="fa-solid fa-cart-shopping" id="ico-cart"></i>
             <div id="badge" class="hide"></div>
@@ -98,6 +103,22 @@
             </div>
         </section>
 
+        <dialog class="modal">
+            <h2>CARRINHO <i class="fa-solid fa-cart-shopping"></i></h2>
+
+            <div class="container-items" id="items-buy">
+
+            </div>
+
+            <div class="total-wrapper">
+                <span class="total"></span>
+            </div>
+
+            <div class="buy-wrapper-cart">
+                <button>Comprar</button>
+            </div>
+        </dialog>
+
         <footer class="footer">
             <div class="footer-container">
                 <div class="footer-col">
@@ -130,11 +151,12 @@
                     <p>Telefone: (11) 99999-9999</p>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <p>© 2026 BookVerse. Todos os direitos reservados.</p>
             </div>
         </footer>
     </main>
 </body>
+
 </html>
