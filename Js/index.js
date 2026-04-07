@@ -9,6 +9,7 @@ const badge = document.querySelector("#badge");
 
 let allBooks = [];
 let booksCart = [];
+let currentCategory = "Todos";
 
 const mockData = {
     items: [
@@ -262,7 +263,7 @@ icoCart.addEventListener("click", () => {
     renderBooksCart();
 });
 
-function renderBooksCart(){
+function renderBooksCart() {
     const item = document.querySelector("#items-buy");
     const spanTotal = document.querySelector(".total");
 
@@ -302,7 +303,7 @@ function renderBooksCart(){
         total += (value * qtd);
 
         priceTxt = `${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value)}`;
-        
+
         cardText += `
                 <article class="items-cart">
                     <img src="./images/teste.png" alt="Capa do livro ${title}">
@@ -322,23 +323,23 @@ function renderBooksCart(){
     item.innerHTML = cardText;
 
     spanTotal.innerHTML = `<span>Total: ${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(total)}</span>`
-    
+
     activeButtonsQuantity();
 };
 
 // Ativar os botões de aumentar e diminuir quantidade e deletar item
-function activeButtonsQuantity(){
+function activeButtonsQuantity() {
     const addQtdItem = document.querySelectorAll(".plus");
     const minusQtdItem = document.querySelectorAll(".minus");
     const deleteItem = document.querySelectorAll(".delete-item");
 
     addQtdItem.forEach(btn => {
-        btn.addEventListener("click", ()=>{
+        btn.addEventListener("click", () => {
             const bookId = btn.getAttribute("data-id");
 
             const addBook = allBooks.find(book => book.id === bookId);
 
-            if (addBook){
+            if (addBook) {
                 booksCart.push(addBook);
 
                 renderBooksCart();
@@ -352,7 +353,7 @@ function activeButtonsQuantity(){
 
             const index = booksCart.findIndex(book => book.id === bookId);
 
-            if (index !== -1){
+            if (index !== -1) {
                 booksCart.splice(index, 1);
 
                 renderBooksCart();
@@ -366,7 +367,7 @@ function activeButtonsQuantity(){
 
             booksCart = booksCart.filter(book => book.id !== bookId);
 
-            if (booksCart.length == 0){
+            if (booksCart.length == 0) {
                 badge.className = badge.className.replace("show", "hide");
             };
 
@@ -379,23 +380,10 @@ window.addEventListener("click", (e) => {
     if (e.target === modal) modal.close();
 });
 
-
-// Filtragem dos livros por categoria
-function filterBooks(category) {
-    if (category === "Todos") {
-        renderBooksPage(allBooks);
-        return;
-    };
-
-    const filtered = allBooks.filter(book =>
-        book.volumeInfo.categories?.includes(category)
-    );
-
-    renderBooksPage(filtered);
-};
-
 // Criação da seção dos botões para filtrar os livros
 function createCategoryButtons() {
+    if (!categoryContainer) return;
+
     const allCategories = allBooks.flatMap(book =>
         book.volumeInfo.categories || []
     );
@@ -412,59 +400,86 @@ function createCategoryButtons() {
 
             btn.classList.add("active");
 
+            currentCategory = category;
 
-            filterBooks(category);
+            applyAllFilters();
         });
 
         categoryContainer.appendChild(btn);
     });
 };
 
-// FIltragem dos livros através do preço
-function filterByPrice() {
-    const min = parseFloat(inputMinPrice.value) || 0;
-    const max = parseFloat(inputMaxPrice.value) || Infinity;
+function applyAllFilters() {
+    let filteredBooks = allBooks;
 
-    const filtered = allBooks.filter(book => {
-        const price = book.saleInfo.listPrice.amount;
+    // Filtro Categoria
+    if (currentCategory !== "Todos") {
+        filteredBooks = filteredBooks.filter(book => book.volumeInfo.categories?.includes(currentCategory));
+    };
 
-        return price >= min && price <= max;
-    });
+    // Filtro por pesquiso de nome
+    const inputSearch = document.querySelector(".container-search input[name='search']");
+    if (inputSearch && inputSearch.value.trim() !== "") {
+        const lowerSearch = inputSearch.value.trim().toLowerCase();
 
-    renderBooksPage(filtered);
-};
+        filteredBooks = filteredBooks.filter(book => {
+            const name = book.volumeInfo.title.toLowerCase();
+            return name.includes(lowerSearch)
+        });
+    };
 
+    // Filtro de preço
+    if (inputMinPrice && inputMaxPrice) {
+        const min = parseFloat(inputMinPrice.value) || 0;
+        const max = parseFloat(inputMaxPrice.value) || Infinity;
 
-function filterByName(){
-    const parametrosUrl = new URLSearchParams(window.location.search);
-    const termoDeBusca = parametrosUrl.get("search");
+        filteredBooks = filteredBooks.filter(book => {
+            const price = book.saleInfo.listPrice.amount;
+            return price >= min && price <= max;
+        });
+    };
 
-    const filtered = allBooks.filter(book => {
-        const name = book.volumeInfo.title;
-        const lowerSearch = termoDeBusca.toLocaleLowerCase()
-
-        return name.toLocaleLowerCase().includes(lowerSearch)
-    })
-
-    renderBooksPage(filtered);
+    renderBooksPage(filteredBooks)
 }
 
 //fetchBooks();
 document.addEventListener("DOMContentLoaded", () => {
 
     //const books = await fetchBooks();
-
-    renderCarousel();
-
     allBooks = mockData.items;
 
+    renderCarousel();
     renderBooksPage(allBooks)
     createCategoryButtons()
 
-    filterByName();
-
+    // Ouvinte do filtro de preço
     if (inputMinPrice && inputMaxPrice) {
-        inputMinPrice.addEventListener("input", filterByPrice);
-        inputMaxPrice.addEventListener("input", filterByPrice);
+        inputMinPrice.addEventListener("input", applyAllFilters);
+        inputMaxPrice.addEventListener("input", applyAllFilters);
     }
+
+    // Ouvinte da barra de busca
+    const inputSearch = document.querySelector(".container-search input[name='search']");
+
+    const formSearchBook = document.querySelector("#form-busca-livros");
+
+    if (inputSearch && formSearchBook) {
+        inputSearch.addEventListener("input", applyAllFilters);
+
+        formSearchBook.addEventListener("subimit", (e) => {
+            e.preventDefault();
+            applyAllFilters();
+        });
+    };
+
+    // Se o usuário estiver na Home Page, o 'formSearchLivros' será null.
+
+    // Verifica se veio redirecionado da Home Page (URL Params)
+    const parametrosUrl = new URLSearchParams(window.location.search);
+    const termoDaUrl = parametrosUrl.get("search");
+
+    if (termoDaUrl && inputSearch) {
+        inputSearch.value = termoDaUrl;
+        applyAllFilters();
+    };
 })

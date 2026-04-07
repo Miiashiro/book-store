@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <link rel="stylesheet" href="./css/book-card.css">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/book-card.css">
     <link rel="stylesheet" href="./css/modal.css">
+
     <script src="./js/index.js" defer></script>
     <title>Document</title>
 </head>
@@ -22,10 +23,11 @@
             </a>
         </div>
 
-        <div class="container-search">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="search" placeholder="Buscar por título ou autor...">
-        </div>
+        <form class="container-search" id="form-busca-livros" method="get">
+            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            
+            <input type="search" name="search" placeholder="Buscar por título...">
+        </form>
 
         <div class="container-cart">
             <i class="fa-solid fa-cart-shopping" id="ico-cart"></i>
