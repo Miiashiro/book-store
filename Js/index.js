@@ -92,13 +92,13 @@ async function fetchBooks() {
 }
 
 // Carrossel dos livros da home-page
-async function renderCarousel() {
+async function renderCarousel(allBooks) {
     if (!carouselList) return;
 
-    const data = mockData.items;
-    console.log(data)
+    //const data = mockData.items;
+    //console.log(data)
 
-    const books = data.slice(0, 10)
+    const books = allBooks.slice(0, 10)
 
     /*const books = allBooks.slice(0, 10);
 
@@ -109,6 +109,7 @@ async function renderCarousel() {
     books.forEach(book => {
         const info = book.volumeInfo;
         const price = book.saleInfo;
+        const bookId = book.id;
 
         const title = info.title;
         const categories = info.categories
@@ -140,7 +141,7 @@ async function renderCarousel() {
                         <span class="name-book">${title}</span>
                         <span class="authors">${authors}</span>
                         <span class="rating"><i class="fa-solid fa-star"></i> ${rating}</span>
-                        <div class="buy">
+                        <div class="buy" data-id="${bookId}">
                             <span class="price">${priceTxt}</span>
                             <button>
                                 <i class="fa-solid fa-cart-shopping"></i>
@@ -154,6 +155,8 @@ async function renderCarousel() {
     })
 
     carouselList.innerHTML = cardText;
+
+    selectBook();
 
     new Splide('#my-carousel', {
         type: 'loop',
@@ -280,6 +283,8 @@ function renderBooksCart() {
         spanTotal.innerHTML = `<span>Total: R$0,00</span`;
         return;
     }
+
+    console.log(booksCart)
 
     const groupedCart = booksCart.reduce((acumulator, book) => {
         if (acumulator[book.id]) {
@@ -450,7 +455,7 @@ function applyAllFilters() {
 
 //fetchBooks();
 document.addEventListener("DOMContentLoaded", async () => {
-
+    allBooks = mockData.items;
     //const bookApi = await fetchBooks();
 
     // if (bookApi || bookApi.length > 0) {
@@ -463,7 +468,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     //     console.log("espere");
     // }
 
-    renderCarousel();
+    renderCarousel(allBooks);
     renderBooksPage(allBooks);
     createCategoryButtons();
 
