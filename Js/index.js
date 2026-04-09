@@ -65,7 +65,7 @@ const mockData = {
         }
     ]
 };
-/*
+
 async function fetchBooks() {
     // Cria uma lista de palavras amplas em inglês para trazer resultados misturados
     const palavrasChave = ['world', 'history', 'science', 'ocean', 'space', 'future', 'art', 'magic', 'life'];
@@ -89,17 +89,20 @@ async function fetchBooks() {
     } catch (error) {
         console.error("Erro ao buscar os livros:", error);
     }
-}*/
+}
 
 // Carrossel dos livros da home-page
 async function renderCarousel() {
-    /*const bookCarousel = await fetchBooks()*/
-
     if (!carouselList) return;
 
     const data = mockData.items;
     console.log(data)
-    const books = data.slice(0, 10);
+
+    const books = data.slice(0, 10)
+
+    /*const books = allBooks.slice(0, 10);
+
+    if (books.length === 0) return;*/
 
     let cardText = '';
 
@@ -175,10 +178,12 @@ async function renderCarousel() {
 }
 
 // Renderizar os livros na página de livros
-function renderBooksPage(filteredBook = allBooks) {
+async function renderBooksPage(filteredBook = allBooks) {
     if (!container) return;
 
-    if (filteredBook.length === 0) {
+    const booksToRender = filteredBook || [];
+
+    if (booksToRender.length === 0) {
         container.innerHTML = "<p>Nenhum livro encontrado.</p>";
         return;
     }
@@ -376,6 +381,7 @@ function activeButtonsQuantity() {
     });
 };
 
+// Fechar modal
 window.addEventListener("click", (e) => {
     if (e.target === modal) modal.close();
 });
@@ -443,14 +449,23 @@ function applyAllFilters() {
 }
 
 //fetchBooks();
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
-    //const books = await fetchBooks();
-    allBooks = mockData.items;
+    //const bookApi = await fetchBooks();
+
+    // if (bookApi || bookApi.length > 0) {
+    //     allBooks = bookApi;
+
+    //     renderCarousel();
+    //     renderBooksPage(allBooks);
+    //     createCategoryButtons();
+    // } else {
+    //     console.log("espere");
+    // }
 
     renderCarousel();
-    renderBooksPage(allBooks)
-    createCategoryButtons()
+    renderBooksPage(allBooks);
+    createCategoryButtons();
 
     // Ouvinte do filtro de preço
     if (inputMinPrice && inputMaxPrice) {
@@ -473,7 +488,6 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // Se o usuário estiver na Home Page, o 'formSearchLivros' será null.
-
     // Verifica se veio redirecionado da Home Page (URL Params)
     const parametrosUrl = new URLSearchParams(window.location.search);
     const termoDaUrl = parametrosUrl.get("search");
