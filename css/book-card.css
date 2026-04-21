@@ -20,7 +20,7 @@ section.book-wrapper{
     border-bottom: 1px solid #b7b7b7;
 }
 
-.categories .title-category{
+.categories .title-category, .price-filter .title-price{
     font-size: 1.5em;
     font-weight: bold;
 }
@@ -38,11 +38,9 @@ section.book-wrapper{
     padding: 6px 12px;
     border: none;
     border-radius: 20px;
-    
-    background: #ffffff; /* fundo leve azulado */
+    background: #ffffff;
     color: #333;
     border: 1px solid #d9d9d9;
-
     cursor: pointer;
     transition: 0.3s;
 }
@@ -62,10 +60,12 @@ section.book-wrapper{
     padding-bottom: 10%;
     position: sticky;
     top: 39%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .filters-container .price-filter input{
-    width: 47%;
     padding: 4px;
     border-radius: 4px;
     border: none;
@@ -122,6 +122,74 @@ section.book-wrapper{
     margin: 0 8px;
 }
 
+@media (max-width: 1024px) {
+    .book-wrapper .interface{
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .filters-container{
+        width: 100%;
+        height: auto;
+        overflow: visible;
+        background: #fff;
+        border-radius: 10px;
+        padding: 15px;
+    }
+
+    .books{
+        width: 100%;
+    }
+
+    .filters-container .categories{
+        position: static; /* remove sticky no mobile */
+        border-bottom: none;
+        padding: 10px 0;
+    }
+
+    .filters-container .price-filter{
+        position: static;
+        padding: 10px 0;
+    }
+
+    .filters-container .price-filter input{
+        border: 1px solid #d9d9d9;
+        border-radius: 10px;
+    }
+
+    .book-container{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .type-category{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .type-category button{
+        flex: 1 1 calc(50% - 8px);
+        font-size: 0.85rem;
+        padding: 5px;
+    }
+
+    .filters-container .price-filter{
+        gap: 10px;
+    }
+
+    .book-container{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px){
+    .book-container{
+        grid-template-columns: 1fr;
+    }
+}
+
 /* Estilo do card do carrossel da home page */
 .title-carousel span a{
     font-size: 1.4em;
@@ -151,39 +219,44 @@ section.book-wrapper{
     box-shadow: 0 4px 7px rgba(0, 0, 0, 0.2);
 }
 
+.book-image-carousel {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
 .book-image-carousel img {
-    max-height: 200px;
-    object-fit: cover;
-    margin-bottom: 10px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.carousel-wrapper{
+    overflow: visible;
+}
+
+.splide {
+    position: relative;
 }
 
 .splide__arrow--prev {
-    left: -3em;
+    left: -50px;
 }
 
 .splide__arrow--next {
-    right: -3em;
+    right: -50px;
 }
 
 .splide__pagination__page.is-active {
     background: #00e676;
 }
 
-.splide__arrow--prev {
-    left: -3em;
-}
-
-.splide__arrow--next {
-    right: -3em;
-}
-
 .splide__track {
     padding-top: 15px;    
     padding-bottom: 25px; 
-}
-
-.card-carousel .txt-book .name-book{
-    font-size: 1.30em;
 }
 
 .card-carousel .txt-book .buy{
@@ -196,6 +269,39 @@ section.book-wrapper{
 
 .card-carousel .txt-book .buy button i, .card-carousel .txt-book .buy button span{
     margin: 0 4px;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .splide__arrow--prev {
+        left: 10px;
+    }
+
+    .splide__arrow--next {
+        right: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .splide__arrow {
+        width: 28px;
+        height: 28px;
+    }
+
+    .card-carousel{
+        padding: 6px;
+    }
+
+    .card-carousel .txt-book .buy{
+        flex-wrap: wrap;
+    }
+
+    .card-carousel .txt-book .buy button{
+        width: 100%;
+
+        flex-shrink: 1;
+        white-space: normal;
+    }
 }
 
 /* Conteúdo do card dos dois carrossel */
@@ -216,17 +322,26 @@ section.book-wrapper{
     border: 1px solid #ccc;
     padding: 3px 8px;
     border-radius: 8px;
-    font-size: 12px;
+    font-size: clamp(10px, 0.9vw, 12px);
     background-color: #f5f5f5;
 }
 
 .txt-book .name-book{
     font-weight: 800;
     padding: 5px 0 0 0;
+    font-size: clamp(0.95rem, 1.2vw, 1.3rem);
+    line-height: 1.2;
+
+    display: -webkit-box;          /* ativa o modo de caixa flexível */
+    -webkit-line-clamp: 2;       /* limita a 2 linhas */
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;           /* esconde o excesso de texto */
 }
 
 .txt-book .authors{
     color: rgb(165, 165, 165);
+    font-size: clamp(0.8rem, 1vw, 1rem);
 }
 
 .txt-book .rating{
@@ -245,14 +360,18 @@ section.book-wrapper{
 
 .txt-book .buy{
     margin-top: auto;
-
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: nowrap;
 }
 
 .buy .price{
     font-weight: bold;
     color: rgb(39, 39, 198);
+    white-space: nowrap;
+    font-size: clamp(1rem, 1.2vw, 1.4rem);
 }
 
 .buy button{
@@ -262,6 +381,8 @@ section.book-wrapper{
     color: #fff;
     background-color: rgb(39, 39, 198);
     cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .buy button:hover{

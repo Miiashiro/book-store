@@ -1,7 +1,7 @@
 .slide{
     position: relative;
     width: 100%;
-    height: 87vh;
+    height: clamp(200px, 87vh, 600px);
 }
 
 .slide .slides{
@@ -108,5 +108,21 @@ span.next:hover, span.prev:hover{
     }
     to{
         left: 0%;
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    span.next, span.prev {
+        font-size: 18px;
+        padding: 10px;
+    }
+}
+
+/* Bolinhas menores no mobile */
+@media (max-width: 480px) {
+    .dots-container .dot {
+        width: 10px;
+        height: 10px;
     }
 }

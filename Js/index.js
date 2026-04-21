@@ -56,7 +56,7 @@ const mockData = {
         {
             id: "A1_OAwAAQBAJ",
             volumeInfo: { title: "O Espadachim de Carvão", authors: ["Affonso Solano"], averageRating: 4.6, categories: ["Fantasia"], imageLinks: { thumbnail: "https://via.placeholder.com/128x192/2c3e50/ffffff?text=Espadachim" } },
-            saleInfo: { saleability: "FOR_SALE", listPrice: { amount: 45.90, currencyCode: "BRL" } }
+            saleInfo: { saleability: "FOR_SALE", listPrice: { amount: 4050.90, currencyCode: "BRL" } }
         },
         {
             id: "A2_OAwAAQBAJ",
@@ -92,11 +92,8 @@ async function fetchBooks() {
 }
 
 // Carrossel dos livros da home-page
-async function renderCarousel(allBooks) {
+function renderCarousel(allBooks) {
     if (!carouselList) return;
-
-    //const data = mockData.items;
-    //console.log(data)
 
     const books = allBooks.slice(0, 10)
 
@@ -168,15 +165,19 @@ async function renderCarousel(allBooks) {
 
         // Responsividade
         breakpoints: {
+            1200: {
+                perPage: 4,
+                perMove: 4,
+            },
             1024: {
                 perPage: 3,
                 perMove: 3,
             },
             768: {
-                perPage: 1,
-                perMove: 1,
+                perPage: 2,
+                perMove: 2,
             }
-        }
+        },
     }).mount();
 }
 
@@ -264,13 +265,13 @@ function selectBook() {
     });
 };
 
-
 // Modal
 icoCart.addEventListener("click", () => {
     modal.showModal();
     renderBooksCart();
 });
 
+// Renderizar os livros no carrinho
 function renderBooksCart() {
     const item = document.querySelector("#items-buy");
     const spanTotal = document.querySelector(".total");
@@ -316,16 +317,22 @@ function renderBooksCart() {
 
         cardText += `
                 <article class="items-cart">
-                    <img src="./images/teste.png" alt="Capa do livro ${title}">
-                    <div>${title}</div>
-                    <div>${priceTxt}</div>
-                
-                    <div class="quant-button-wrap">
-                        <button class="minus" data-id="${bookId}">-</button>
-                        <input value="${qtd}" readonly>
-                        <button class="plus" data-id="${bookId}">+</button>
+                    <div class="book-image-cart"> 
+                        <img src="./images/teste.png" alt="Capa do livro ${title}">
                     </div>
-                    <div class="delete-item" data-id="${bookId}">X</div>
+                    <div class="txt-cart">
+                        <div class="title">${title}</div>
+                        <div>${priceTxt}</div>
+                        
+                        <div class="quant-button-wrap">
+                            <button class="minus" data-id="${bookId}">-</button>
+                            <input value="${qtd}" readonly>
+                            <button class="plus" data-id="${bookId}">+</button>
+                        </div>
+
+                        <div class="delete-item" data-id="${bookId}">X</div>
+
+                    </div>
                 </article>
             `
     })
@@ -343,6 +350,7 @@ function activeButtonsQuantity() {
     const minusQtdItem = document.querySelectorAll(".minus");
     const deleteItem = document.querySelectorAll(".delete-item");
 
+    // Aumentar quantidade
     addQtdItem.forEach(btn => {
         btn.addEventListener("click", () => {
             const bookId = btn.getAttribute("data-id");
@@ -357,6 +365,7 @@ function activeButtonsQuantity() {
         });
     });
 
+    // Diminuir quantidade
     minusQtdItem.forEach(btn => {
         btn.addEventListener("click", () => {
             const bookId = btn.getAttribute("data-id");
@@ -371,6 +380,7 @@ function activeButtonsQuantity() {
         });
     });
 
+    // Deletar item
     deleteItem.forEach(btn => {
         btn.addEventListener("click", () => {
             const bookId = btn.getAttribute("data-id");
