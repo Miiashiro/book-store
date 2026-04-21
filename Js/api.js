@@ -16,7 +16,6 @@ export async function fetchBooks() {
         }
 
         const data = await response.json();
-        console.log(data);
         return data.items || [];
     } catch (error) {
         console.error("Erro ao buscar os livros:", error);

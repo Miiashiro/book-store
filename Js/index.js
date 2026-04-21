@@ -7,8 +7,6 @@ import { setupFilters } from "./filters.js";
 
 let allBooks = [];
 
-
-
 const mockData = {
     items: [
         {

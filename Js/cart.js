@@ -41,8 +41,6 @@ export function selectBook() {
     });
 };
 
-console.log("booksCart", booksCart)
-
 // Renderizar os livros no carrinho
 function renderBooksCart() {
     const item = document.querySelector("#items-buy");
@@ -56,8 +54,6 @@ function renderBooksCart() {
         spanTotal.innerHTML = `<span>Total: R$0,00</span`;
         return;
     }
-
-    console.log(booksCart)
 
     const groupedCart = booksCart.reduce((acumulator, book) => {
         if (acumulator[book.id]) {
