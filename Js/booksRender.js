@@ -9,9 +9,7 @@ export function renderCarousel(allBooks) {
 
     const books = allBooks.slice(0, 10)
 
-    /*const books = allBooks.slice(0, 10);
-
-    if (books.length === 0) return;*/
+    if (books.length === 0) return;
 
     let cardText = '';
 
@@ -41,7 +39,7 @@ export function renderCarousel(allBooks) {
             <li class="splide__slide">
                 <article class="card-carousel">
                     <div class="book-image-carousel">
-                        <img src="./images/teste.png" alt="Capa do livro ${title}">
+                        <img src="${thumbnail}" alt="Capa do livro ${title}">
                     </div>
                     <div class="txt-book">
                         <div class="category">
@@ -127,11 +125,11 @@ export function renderBooksPage(filteredBook = allBooks) {
 
             priceTxt = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
         }
-        //<img src=${thumbnail} alt="Capa do livro ${title}">
+        
         cardText += `
                 <article class="book-card">
                     <div class="book-image">
-                        <img src="./images/teste.png" alt="Capa do livro ${title}">
+                        <img src="${thumbnail}" alt="Capa do livro ${title}">
                     </div>
                     <div class="txt-book">
                         <div class="category">
