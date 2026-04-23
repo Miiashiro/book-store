@@ -1,98 +1,83 @@
-var slideImages = document.querySelectorAll('.slides img');
-var next = document.querySelector('.next');
-var prev = document.querySelector('.prev');
+let counter = 0;
+let deletInterval;
 
-// Acesso aos indicadores
-var dots = document.querySelectorAll('.dot');
+export function initBannerCarousel() {
+    // Selecionamos os elementos aqui dentro
+    const slideImages = document.querySelectorAll('.slides img');
+    const next = document.querySelector('.next');
+    const prev = document.querySelector('.prev');
+    const dots = document.querySelectorAll('.dot');
+    const slideContainer = document.querySelector('.slide');
 
-var counter = 0;
+    // Se não existir o container do slide
+    if (!slideContainer || !next || !prev) return;
 
-// Botão de passar imagem
-next.addEventListener('click', slideNext);
-
-function slideNext() {
-    slideImages[counter].style.animation = 'next1 0.5s ease-in forwards';
-
-    if (counter >= slideImages.length - 1) {
-        counter = 0;
-    } else {
-        counter++;
-    }
-
-    slideImages[counter].style.animation = 'next2 0.5s ease-in forwards';
-
-    indicators();
-}
-
-// Botão de voltar imagem
-prev.addEventListener('click', slidePrev);
-
-function slidePrev() {
-    slideImages[counter].style.animation = 'prev1 0.5s ease-in forwards';
-
-    // diminuir o índice, circulando de volta ao último slide quando chegar em 0
-    if (counter <= 0) {
-        counter = slideImages.length - 1;
-    } else {
-        counter--;
-    }
-
-    slideImages[counter].style.animation = 'prev2 0.5s ease-in forwards';
+    // Botão de passar imagem
+    next.addEventListener('click', slideNext);
     
-    indicators();
-}
-
-// Auto sliding
-function autoSliding() {
-    deletInterval = setInterval(timer, 4500);
-
-    function timer() {
-        slideNext();
+    function slideNext() {
+        slideImages[counter].style.animation = 'next1 0.5s ease-in forwards';
+        if (counter >= slideImages.length - 1) {
+            counter = 0;
+        } else {
+            counter++;
+        }
+        slideImages[counter].style.animation = 'next2 0.5s ease-in forwards';
         indicators();
     }
-}
-
-autoSliding();
-
-// Parar o slide automatico quando o mouse ficar sobre
-const slide = document.querySelector('.slide');
-
-slide.addEventListener('mouseover', function () {
-    clearInterval(deletInterval);
-});
-
-// Inicia o slide automatico quando o mouse não esta sobre
-slide.addEventListener('mouseout', autoSliding);
-
-// Adicionar e remove a classe active dos indicadores
-function indicators() {
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace('active', ' ');
-    }
-
-    dots[counter].className += ' active';
-}
-
-function switchImage(currentImage) {
-    currentImage.classList.add('active');
-
-    var imageId = currentImage.getAttribute('attr');
-
-    if (imageId > counter) {
-        slideImages[counter].style.animation = 'next1 0.5s ease-in forwards';
-
-        counter = imageId;
-        
-        slideImages[counter].style.animation = 'next2 0.5s ease-in forwards';
-    } else if (imageId == counter) {
-        return;
-    } else {
+    
+    // Botão de voltar imagem
+    prev.addEventListener('click', slidePrev);
+    
+    function slidePrev() {
         slideImages[counter].style.animation = 'prev1 0.5s ease-in forwards';
-        
-        counter = imageId;
-        
+        if (counter <= 0) {
+            counter = slideImages.length - 1;
+        } else {
+            counter--;
+        }
         slideImages[counter].style.animation = 'prev2 0.5s ease-in forwards';
+        indicators();
+    }
+    
+    // Auto sliding
+    function autoSliding() {
+        // Limpa intervalo anterior se existir para não duplicar velocidade
+        clearInterval(deletInterval); 
+
+        deletInterval = setInterval(() => {
+            slideNext();
+        }, 4500);
+    }
+    
+    autoSliding();
+    
+    // Eventos de Mouse
+    slideContainer.addEventListener('mouseover', () => clearInterval(deletInterval));
+    slideContainer.addEventListener('mouseout', autoSliding);
+    
+    // Indicadores
+    function indicators() {
+        dots.forEach(dot => dot.classList.remove('active'));
+        if (dots[counter]) dots[counter].classList.add('active');
     }
 
-    indicators();
+    // Suporte para clique nos dots (indicadores)
+    dots.forEach(dot => {
+        dot.addEventListener('click', function() {
+            const imageId = parseInt(this.getAttribute('attr'));
+            if (imageId === counter) return;
+
+            if (imageId > counter) {
+                slideImages[counter].style.animation = 'next1 0.5s ease-in forwards';
+                counter = imageId;
+                slideImages[counter].style.animation = 'next2 0.5s ease-in forwards';
+            } else {
+                slideImages[counter].style.animation = 'prev1 0.5s ease-in forwards';
+                counter = imageId;
+                slideImages[counter].style.animation = 'prev2 0.5s ease-in forwards';
+            }
+            indicators();
+        });
+    });
 }
