@@ -40,16 +40,20 @@ export function createCategoryButtons(allBooks) {
     });
 };
 
+// Configuração dos filtros de preço e pesquisa
 export function setupFilters(allBooks) {
     databaseBooks = allBooks;
 
+    // Filtros de preço
     if (inputMinPrice && inputMaxPrice) {
         inputMinPrice.addEventListener("input", applyAllFilters);
         inputMaxPrice.addEventListener("input", applyAllFilters);
     }
 
+    // Filtro de pesquisa
     if (inputSearch && formSearchLivros) {
         inputSearch.addEventListener("input", applyAllFilters);
+        
         formSearchLivros.addEventListener("submit", (e) => {
             e.preventDefault();
             applyAllFilters();
@@ -66,6 +70,7 @@ export function setupFilters(allBooks) {
     }
 }
 
+// Aplicação de todos os filtros
 function applyAllFilters() {
     let filteredBooks = databaseBooks;
 
@@ -74,7 +79,7 @@ function applyAllFilters() {
         filteredBooks = filteredBooks.filter(book => book.volumeInfo.categories?.includes(currentCategory));
     };
 
-    // Filtro por pesquiso de nome
+    // Filtro por pesquisa de nome
     const inputSearch = document.querySelector(".container-search input[name='search']");
     if (inputSearch && inputSearch.value.trim() !== "") {
         const lowerSearch = inputSearch.value.trim().toLowerCase();

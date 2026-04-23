@@ -1,10 +1,12 @@
 const modal = document.querySelector(".modal");
 const icoCart = document.querySelector("#ico-cart");
 const badge = document.querySelector("#badge");
+const buy = document.querySelector(".buy-wrapper-cart button");
 
 let booksCart = [];
 let databaseBooks = [];
 
+// Iniciar o modal
 export function initCart(allBooks) {
     databaseBooks = allBooks;
 
@@ -163,3 +165,18 @@ function activeButtonsQuantity() {
         });
     });
 };
+
+// Finalizar compra
+buy.addEventListener("click", () => {
+    if (booksCart.length == 0) {
+        alert("Adicione um item ao carrinho para finalizar a compra.");
+    } else {
+        alert("Compra finalizada com sucesso!");
+        
+        booksCart = [];
+
+        badge.className = badge.className.replace("show", "hide");
+
+        renderBooksCart();
+    }
+})

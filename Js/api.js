@@ -19,5 +19,6 @@ export async function fetchBooks() {
         return data.items || [];
     } catch (error) {
         console.error("Erro ao buscar os livros:", error);
+        return [];
     }
 }
