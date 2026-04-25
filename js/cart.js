@@ -88,7 +88,7 @@ function renderBooksCart() {
         cardText += `
                 <article class="items-cart">
                     <div class="book-image-cart"> 
-                        <img src="./images/teste.png" alt="Capa do livro ${title}">
+                        <img src="${thumbnail}" alt="Capa do livro ${title}">
                     </div>
                     <div class="txt-cart">
                         <div class="title">${title}</div>
