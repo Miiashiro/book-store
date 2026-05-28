@@ -2,6 +2,7 @@ import { selectBook } from "./cart.js";
 
 const container = document.querySelector("#book-container");
 const carouselList = document.querySelector("#splide-list");
+const myCarousel = document.querySelector("#my-carousel");
 
 // Carrossel dos livros da home-page
 export function renderCarousel(allBooks) {
@@ -9,7 +10,13 @@ export function renderCarousel(allBooks) {
 
     const books = allBooks.slice(0, 10)
 
-    if (books.length === 0) return;
+    if (books.length === 0){
+        myCarousel.style.visibility = "visible"
+
+        carouselList.innerHTML = "<p>Nenhum livro disponível no momento.</p>";
+        
+        return;
+    };
 
     let cardText = '';
 
@@ -154,4 +161,20 @@ export function renderBooksPage(filteredBook = allBooks) {
 
     // Selecionar livros ao carrinho
     selectBook();
+}
+
+// Mostrar loading enquanto a API não responde
+export function showLoading() {
+    const container = document.querySelector("#book-container");
+    const carouselList = document.querySelector("#splide-list");
+
+    const loadingHTML = `
+        <div class="loading-container">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            <p>Carregando...</p>
+        </div>
+    `;
+
+    if (container) container.innerHTML = loadingHTML;
+    if (carouselList) carouselList.innerHTML = `<li>${loadingHTML}</li>`;
 }

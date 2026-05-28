@@ -6,6 +6,13 @@
 
 body{
     background-color: #f8f8f8;
+    min-height: 100vh;
+    display: flex;         
+    flex-direction: column;
+}
+
+.book-wrapper {
+    flex: 1; 
 }
 
 section.carousel-wrapper{
@@ -195,6 +202,7 @@ section.about-wrapper .interface{
     background-color: #111;
     color: #fff;
     padding: 40px 20px 20px;
+    margin-top: auto;
 }
 
 .footer-container{

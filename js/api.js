@@ -1,4 +1,6 @@
 export async function fetchBooks() {
+    const myApiKey = "AIzaSyA8SLie6XCoDFSeEfUI9ta3gnvk3pWLRbo"
+
     // Cria uma lista de palavras amplas em inglês para trazer resultados misturados
     const palavrasChave = ['world', 'history', 'science', 'ocean', 'space', 'future', 'art', 'magic', 'life'];
     
@@ -9,7 +11,7 @@ export async function fetchBooks() {
     const puloAleatorio = Math.floor(Math.random() * 40);
     
     try{
-        const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${palavraSorteada}&maxResults=20&startIndex=${puloAleatorio}&filter=paid-ebooks`);
+        const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${palavraSorteada}&maxResults=20&startIndex=${puloAleatorio}&filter=paid-ebooks&key=${myApiKey}`);
 
         if(!response.ok){
             throw new Error(`Erro na requisição: ${response.status}`);
