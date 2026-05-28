@@ -8,10 +8,10 @@ const myCarousel = document.querySelector("#my-carousel");
 export function renderCarousel(allBooks) {
     if (!carouselList) return;
 
-    const books = allBooks.slice(0, 10)
+    const books = allBooks.slice(0, 10);
 
     if (books.length === 0){
-        myCarousel.style.visibility = "visible"
+        myCarousel.style.visibility = "visible";
 
         carouselList.innerHTML = "<p>Nenhum livro disponível no momento.</p>";
         
@@ -176,5 +176,9 @@ export function showLoading() {
     `;
 
     if (container) container.innerHTML = loadingHTML;
-    if (carouselList) carouselList.innerHTML = `<li>${loadingHTML}</li>`;
+
+    if (carouselList){
+        myCarousel.style.visibility = "visible"
+        carouselList.innerHTML = `<li>${loadingHTML}</li>`;
+    }
 }

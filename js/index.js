@@ -16,21 +16,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (bookApi || bookApi.length > 0) {
         allBooks = bookApi;
 
-        const temCarrossel = document.querySelector("#splide-list");
-        const temGradeLivros = document.querySelector("#book-container");
+        const isCarousel = document.querySelector("#splide-list");
+        const isBooksPage = document.querySelector("#book-container");
 
-        // Se estiver na Home (onde tem o carrossel do Splide)
-        if (temCarrossel) {
+        if (isCarousel) {
             renderCarousel(allBooks);     
         }
         
-        // Se estiver na Página de Mais Livros (onde tem a grade principal)
-        if (temGradeLivros) {
+        if (isBooksPage) {
             renderBooksPage(allBooks);
             createCategoryButtons(allBooks);
+            setupFilters(allBooks);
         }
         
-        setupFilters(allBooks);
         initCart(allBooks);
     } else {
         const container = document.querySelector("#book-container");
